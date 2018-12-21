@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataModel.Entities
 {
@@ -15,5 +15,8 @@ namespace DataModel.Entities
         public int Duration { get; set; }
         public DateTime ReleasedDate { get; set; }
 
+        public List<Comment> Comment { get; set; }
+        public List<MovieActor> Actors { get; set; }
+        public Person Director { get; set; }
     }
 }

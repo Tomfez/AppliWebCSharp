@@ -18,16 +18,26 @@ namespace Services.Repositories
 
         public Movie Add(Movie movie)
         {
+            foreach(MovieActor ma in movie.Actors)
+            {
+                var actor = ma.Actor;
+                var dbActor = this._context.Persons.FirstOrDefault(x => x.FirstName == actor.FirstName && x.LastName == actor.LastName);
+                if(dbActor != null)
+                {
+                    ma.Actor = dbActor;
+                }
+            }
+
             this._context.Movies.Add(movie);
             this._context.SaveChanges();
             return movie;
         }
-
+      
         public bool Delete(int id)
         {
             var entity = _context.Movies.FirstOrDefault(x => x.Id == id);
 
-            if(entity == null)
+            if (entity == null)
             {
                 return false;
             }
